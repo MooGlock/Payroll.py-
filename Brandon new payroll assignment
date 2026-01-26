@@ -1,0 +1,88 @@
+# ==========================================================
+# SYSTEM NAME: NEURAL-PAYROLL AUTOMATION ENGINE
+# VERSION: 1.0.5 (GITHUB-SAFE BUILD)
+# OBJECTIVE: AUTOMATED FINANCIAL DISBURSEMENT CALCULATION
+# ==========================================================
+
+def compute_financials(hours, rate, tax_rate):
+gross = hours * rate
+tax = gross * tax_rate
+net = gross - tax
+return gross, tax, net
+
+
+def log_employee(emp_id, hours, rate, tax_rate, gross, tax, net):
+print(f"\nEMPLOYEE ID: {emp_id}")
+print(f"Hours Worked: {hours}")
+print(f"Hourly Rate: ${rate:.2f}")
+print(f"Tax Rate: {tax_rate:.0%}")
+print(f"Gross Pay: ${gross:.2f}")
+print(f"Tax Deducted: ${tax:.2f}")
+print(f"Net Pay: ${net:.2f}")
+
+
+def run_payroll():
+employees = [
+("EMP001", 40, 25.00, 0.20),
+("EMP002", 38, 30.00, 0.22),
+("EMP003", 45, 22.50, 0.18),
+("EMP004", 50, 28.00, 0.25)
+]
+
+total_hours = 0
+total_gross = 0
+total_tax = 0
+total_net = 0
+
+for emp in employees:
+emp_id, hours, rate, tax_rate = emp
+gross, tax, net = compute_financials(hours, rate, tax_rate)
+
+log_employee(emp_id, hours, rate, tax_rate, gross, tax, net)
+
+total_hours += hours
+total_gross += gross
+total_tax += tax
+total_net += net
+
+print("\n================ FINAL PAYROLL SUMMARY ================")
+print(f"Employees Processed: {len(employees)}")
+print(f"Total Hours Worked: {total_hours}")
+print(f"Total Gross Pay: ${total_gross:.2f}")
+print(f"Total Taxes Paid: ${total_tax:.2f}")
+print(f"Total Net Pay: ${total_net:.2f}")
+print("=======================================================\n")
+
+
+if __name__ == "__main__":
+run_payroll()
+    # Requirement 1: Main loop terminated by typing "End"
+    while True:
+        name = get_employee_name()
+        if name.lower() == "end":
+            break
+        
+        # Calling input functions inside the loop
+        hours = get_total_hours()
+        rate = get_hourly_rate()
+        tax_rate = get_tax_rate()
+        
+        # Calling calculation function inside the loop
+        gross, tax_amt, net = calculate_pay(hours, rate, tax_rate)
+        
+        # Calling display function inside the loop
+        display_employee_data(name, hours, rate, gross, tax_rate, tax_amt, net)
+        
+        # Accumulate totals for final summary
+        total_employees += 1
+        tot_hours += hours
+        tot_gross += gross
+        tot_tax += tax_amt
+        tot_net += net
+
+    # Final display outside the loop
+    if total_employees > 0:
+        display_totals(total_employees, tot_hours, tot_gross, tot_tax, tot_net)
+
+if __name__ == "__main__":
+    main()
