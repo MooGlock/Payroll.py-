@@ -38,7 +38,7 @@ for emp in employees:
 emp_id, hours, rate, tax_rate = emp
 gross, tax, net = compute_financials(hours, rate, tax_rate)
 
-log_employee(emp_id, hours, rate, tax_rate, gross, tax, net)
+log_employee(emp_id, hours, rate, tax_rate, gross, tax, net) 
 
 total_hours += hours
 total_gross += gross
